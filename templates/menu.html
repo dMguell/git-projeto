@@ -1,0 +1,110 @@
+
+{% load static %}
+
+{% block conteudo %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Produto</title>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurante - Seja bem-vindo!</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/fontawesome.css" />
+    <link rel="stylesheet" href="../static/css/animate.css " />
+    <link rel="stylesheet" href="../static/css/main.css " />
+</head>
+<body>
+    <section class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg pl-0 pr-0 col-one">
+                <a class="navbar-brand wow fadeIn" href="#">
+                    <img src="../static/img/logo.png" width="160" class="img-logo" />
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
+                    <span class="navbar-toggler-icon">
+                        <i class="fas fa-bars"></i>
+                    </span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ml-auto mr-auto wow fadeIn">
+                        <li class="nav-item">
+                            <a href="{% url 'cadastrar-produto' %}" class="nav-link"><b>Produtos</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#categorias" class="nav-link"><b>Novos Categorias</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#restaurante" class="nav-link"><b>Novos Restaurantes</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'listaprodutos' %}" class="nav-link"><b>Lista de produtos</b></a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <a href="" class="btn btn-primary">Minha Conta</a>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-primary">Entrar</a>
+                        {% endif %}
+                    </ul>
+                </div>
+                    
+            </nav>
+        </div>
+    </section>
+    <section class="cardapio" id="cardapio">
+
+        <div class="background-cardapio"></div>
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-12 col-one text-center mb-5 wow fadeIn">
+                    <span class="hint-title"><b>Cardapio</b></span>
+                </div>
+                <div class="col-12">
+                    <div class="row" id="itensCardapio">
+                        
+                        {% for prod in produtos %}
+                        <div class="col-3 mb-5">
+                            <div class="card card-item" id="the-gramercy-tavern-burger-4-pack">
+                                <div class="img-produto">
+                                    <img src="{{ prod.img.url }}">        
+                                </div>
+                                <p class="title-produto text-center nt-4">
+                                    <b>{{ prod.name }}</b>
+                                </p>
+                                <p class="price-produto text-center">
+                                    <b>{{ prod.price }}</b>
+                                </p>
+                                <div class="add-carrinho">
+                                    <button type="submit" name="deletar_produto" class="btn btn-danger btn-sm">
+                                        <span class="fas fa-trash-alt"></span> Excluir
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+          
+           
+</body>
+</html>
+
+
+
+{% endblock %}
